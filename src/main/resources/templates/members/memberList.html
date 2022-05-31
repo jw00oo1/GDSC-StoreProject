@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member List</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:if="${userList != null}">
+                <tr th:each="user : ${userList}">
+                    <td th:text="${user != null} ? ${user.userId} : 'user is null'"></td>
+                    <td th:text="${user != null} ? ${user.userName} : 'user is null'"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
