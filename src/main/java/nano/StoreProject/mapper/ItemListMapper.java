@@ -10,14 +10,14 @@ import java.util.List;
 @Mapper
 public interface ItemListMapper {
     // 상품 등록
-    public void itemEnroll(ItemVo item);
+    void itemEnroll(ItemVo item);
 
     // 상품 정보
-    public ItemVo getItemInfo(int itemId);
+    ItemVo getItemInfo(int itemId);
 
     // 상품 리스트
-    public List<ItemVo> itemsGetList();
+    List<ItemVo> itemsGetList();
 
     // 상품 총 개수
-    public int itemsGetTotal();
+    int itemsGetTotal();
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nano.StoreProject.mapper.ChatMapper">
+    <resultMap id="chatRoomResult" type="nano.StoreProject.vo.chat.ChatRoom">
+        <result property="roomNo" column="ROOM_NO"/>
+        <result property="sellerId" column="SELLER_ID"/>
+        <result property="buyerId" column="BUYER_ID"/>
+        <result property="itemNo" column="ITEM_NO"/>
+    </resultMap>
+
+    <resultMap id="chatMessageResult" type="nano.StoreProject.vo.chat.ChatMessage">
+        <result property="roomNo" column="ROOM_NO"/>
+        <result property="messageNo" column="MESSAGE_NO"/>
+        <result property="message" column="MESSAGE"/>
+        <result property="senderId" column="SENDER_ID"/>
+        <result property="createDate" column="CREATE_DATE"/>
+    </resultMap>
+
+    <insert id="createChatRoom" parameterType="nano.StoreProject.vo.chat.ChatRoom">
+        insert into CHATROOM (SELLER_ID, BUYER_ID, ITEM_NO)
+        values(#{sellerId}, #{buyerId}, #{itemNo})
+    </insert>
+
+    <select id="chatRoomList" parameterType="string" resultMap="chatRoomResult">
+        select *
+        from CHATROOM
+        where SELLER_ID=#{userId} or BUYER_ID=#{userId}
+    </select>
+
+    <select id="getChatRoom" parameterType="string" resultMap="chatRoomResult">
+        select *
+        from CHATROOM
+        where ROOM_NO=#{roomNo}
+    </select>
+
+    <select id="messageList" parameterType="string" resultMap="chatMessageResult">
+        select *
+        from CHATMESSAGE
+        where ROOM_NO=#{roomNo}
+    </select>
+
+    <insert id="createChatMessage" parameterType="nano.StoreProject.vo.chat.ChatMessage">
+        insert into CHATROOM (ROOM_NO, MESSAGE, SENDER_ID)
+        values(#{roomNo}, #{message}, #{senderId})
+    </insert>
+</mapper>

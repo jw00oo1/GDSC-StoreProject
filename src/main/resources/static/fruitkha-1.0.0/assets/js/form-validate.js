@@ -1,26 +1,14 @@
-//function valid_datas( f ){
-//
-//	if( f.itemName.value == '' ){
-//		jQuery('#form_status').html('<span class="wrong">Your item must not be empty!</span>');
-//		notice( f.itemName );
-//	}else{
-//	     var itemName = $("#itemName").val();
-//	     var tradeName = $("#tradeName").val();
-//	     var content  = $("content").val();
-//	     var param = {"itemName":itemName, "tradeName":tradeName, "content":content}
-//
-//		 $.ajax({
-//			url: '/register-item',
-//			type: 'post',
-////			data: jQuery('form#fruitkha-contact').serialize(),
-//            data: JSON.stringify(param),
-//            dataType: "text",
-//			complete: function(data) {
-//                alert("성공적으로 등록되었습니다.");
-//                location.href = '/';
-//			}
-//		});
-//}
+function valid_chat() {
+    var uid = '<%=(String)session.getAttribute("userId")%>';
+
+    if (uid == "null") {
+        jQuery('#form_status').html('<span class="wrong">You need to log in!</span>');
+        notice( f.chatButton );
+        return false;
+    }
+
+    return true;
+}
 
 function valid_datas( f ){
 
@@ -30,15 +18,16 @@ function valid_datas( f ){
 	}else{
 	     var itemName = $("#itemName").val();
 	     var tradeName = $("#tradeName").val();
-	     var content  = $("content").val();
+	     var content  = $("#content").val();
 	     var param = {"itemName":itemName, "tradeName":tradeName, "content":content}
+	     console.log(f);
 
 		 jQuery.ajax({
 
 			url: '/register-item',
 			type: 'post',
 			data: jQuery('form#fruitkha-contact').serialize(),
-			dataType: 'JSON',
+            dataType: "JSON",
 			complete: function(data) {
 				jQuery('#form_status').html(data.responseText);
 				jQuery('#fruitkha-contact').find('input,textarea').attr({value:''});

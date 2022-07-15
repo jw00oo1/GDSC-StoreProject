@@ -49,13 +49,13 @@ public class ItemController {
             System.out.println("need login");
             alertmsg = "<script>alert('로그인이 필요한 작업입니다');location.href='/'";
         } else {
-            System.out.println("itemVo = " + itemVo + ", session = " + session);
+            System.out.println("itemVo = " + itemVo + ", session = " + (String)session.getAttribute("userId"));
             if (itemVo != null) {
-                itemVo.setSellerId(session.getId());
+                itemVo.setSellerId((String)session.getAttribute("userId"));
                 itemService.addItem(itemVo);
                 alertmsg = "<script>alert('성공적으로 등록되었습니다');location.href='/'";
             } else {
-                System.out.println("itemvo is null");
+                System.out.println("item is null");
             }
         }
         return alertmsg;
