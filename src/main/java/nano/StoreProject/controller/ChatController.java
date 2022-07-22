@@ -8,6 +8,7 @@ import nano.StoreProject.service.ItemService;
 import nano.StoreProject.vo.ItemVo;
 import nano.StoreProject.vo.chat.ChatMessage;
 import nano.StoreProject.vo.chat.ChatRoom;
+import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -29,16 +31,13 @@ public class ChatController {
     // 채팅방 생성
 //    @ResponseBody
     @GetMapping("createchat")
-    public String createChatRoom(HttpServletRequest request, @RequestParam("id") Integer itemId) {
+    public String createChatRoom(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") Integer itemId) {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("userId") == null) {
-            String alertmsg = "<script>alert('로그인이 필요한 작업입니다');location.href='/'";
-            request.setAttribute("msg", alertmsg);
-            request.setAttribute("url", request.getHeader("Referer"));
-
-            return "alert";
-        }
+        // js단에서 처리 (valid_chat())
+//        if (session.getAttribute("userId") == null) {
+//            return "<script>alert('로그인이 필요한 작업입니다');location.href='/'";
+//        }
 
         String userId = (String) session.getAttribute("userId");
 
@@ -48,21 +47,22 @@ public class ChatController {
 
             if (!sellerId.equals(userId)) {
                 ChatRoom chatRoom = new ChatRoom();
-                chatRoom.setItemNo(Integer.toString(itemId));
+                chatRoom.setItemNo(itemId);
                 chatRoom.setSellerId(sellerId);
                 chatRoom.setBuyerId(userId);
 
-                System.out.println(chatRoom);
+                chatService.createChatRoom(chatRoom);
 
+                System.out.println(chatRoom);
             }
         }
 
-        return "redirect:/chat";
+        return "redirect:/chat_bs";
     }
 
     // 채팅방 메세지 불러오기
     @RequestMapping(value="{roomNo}")
-    public void getChatMessageList(@PathVariable String roomNo, HttpServletResponse response)throws JsonIOException, IOException {
+    public void getChatMessageList(@PathVariable int roomNo, HttpServletResponse response)throws JsonIOException, IOException {
 
         List<ChatMessage> chatMessageList = chatService.getChatMessage(roomNo);
         response.setContentType("application/json; charset=utf-8");

@@ -47,43 +47,43 @@ public class ChatHandler extends TextWebSocketHandler {
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
         chatMessage.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
         ChatRoom chatRoom = chatService.getChatRoom_pk(chatMessage.getRoomNo());
-
+        String roomNo = Integer.toString(chatRoom.getRoomNo());
 
         // 채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어왔고, DB에서의 채팅방이 있을 때
         // 채팅방 생성
-        if(RoomList.get(chatRoom.getRoomNo()) == null && chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
+        if(RoomList.get(roomNo) == null && chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
 
             // 채팅방에 들어갈 session들
             ArrayList<WebSocketSession> sessionTwo = new ArrayList<>();
             // session 추가
             sessionTwo.add(session);
             // sessionList에 추가
-            sessionList.put(session, chatRoom.getRoomNo());
+            sessionList.put(session, roomNo);
             // RoomList에 추가
-            RoomList.put(chatRoom.getRoomNo(), sessionTwo);
+            RoomList.put(roomNo, sessionTwo);
             // 확인용
             System.out.println("채팅방 생성");
         }
 
         // 채팅방이 존재 할 때
-        else if(RoomList.get(chatRoom.getRoomNo()) != null && chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
+        else if(RoomList.get(roomNo) != null && chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
 
             // RoomList에서 해당 방번호를 가진 방이 있는지 확인.
-            RoomList.get(chatRoom.getRoomNo()).add(session);
+            RoomList.get(roomNo).add(session);
             // sessionList에 추가
-            sessionList.put(session, chatRoom.getRoomNo());
+            sessionList.put(session, roomNo);
             // 확인용
             System.out.println("생성된 채팅방으로 입장");
         }
 
         // 채팅 메세지 입력 시
-        else if(RoomList.get(chatRoom.getRoomNo()) != null && !chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
+        else if(RoomList.get(roomNo) != null && !chatMessage.getMessage().equals("ENTER-CHAT") && chatRoom != null) {
 
             // 메세지에 이름, 이메일, 내용을 담는다.
             TextMessage textMessage = new TextMessage(chatMessage.getSenderId() + "," + chatMessage.getMessage());
 
             // 해당 채팅방의 session에 뿌려준다.
-            for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+            for(WebSocketSession sess : RoomList.get(roomNo)) {
                 sess.sendMessage(textMessage);
             }
 

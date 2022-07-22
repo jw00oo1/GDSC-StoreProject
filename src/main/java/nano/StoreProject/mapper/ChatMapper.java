@@ -16,10 +16,16 @@ public interface ChatMapper {
     //search chatroom with seller name, buyer name, item no
     List<ChatRoom> chatRoomList(String chatroom);
 
+    List<ChatRoom> itemChatRoomList(int itemNo);
+
     // list all chat messages in the chat room
-    List<ChatMessage> messageList(String roomNo);
+    List<ChatMessage> messageList(int roomNo);
 
     void createChatMessage(ChatMessage chatMessage);
 
-    ChatRoom getChatRoom(String roomNo);
+    ChatRoom getChatRoom(int roomNo);
+
+    void deleteChatRoom(int roomNo);
+
+    void deleteChatMessage(int roomNo);
 }

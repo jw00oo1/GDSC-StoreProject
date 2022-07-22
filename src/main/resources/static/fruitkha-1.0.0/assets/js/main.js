@@ -165,6 +165,15 @@
         $(".close-btn").on("click", function() {
             $(".login-area").removeClass("login-active");
         });
+
+        //signin form
+        $(".signin-form").on("click", function(){
+            $(".signin-area").addClass("signin-active");
+        });
+
+        $(".close-btn").on("click", function() {
+            $(".signin-area").removeClass("signin-active");
+        });
     });
 
 

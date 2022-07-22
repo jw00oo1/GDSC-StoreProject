@@ -12,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,26 +28,26 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String logout(HttpSession session) throws Exception{
         userService.logout(session);
 
         return "redirect:/";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("signup")
     public String signUpForm() {
         return "signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public String signUp(UserVo userVo) {
         boolean isSignup = userService.joinUser(userVo);
 
         return "redirect:/"; //로그인 구현 예정
     }
 
-    @GetMapping("/members")
+    @GetMapping("members")
     public String userList(Model model) {
         List<UserVo> userList = userService.getUsers();
 
@@ -52,9 +55,17 @@ public class UserController {
         return "/members/memberList";
     }
 
-    @PostMapping("/")
+    @PostMapping("login")
     public String mainLogin(UserVo userVo, HttpSession session) {
+
         String userName = userService.loginUser(userVo, session);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("signin")
+    public String mainSignin(UserVo userVo) {
+        boolean isSignup = userService.joinUser(userVo);
 
         return "redirect:/";
     }

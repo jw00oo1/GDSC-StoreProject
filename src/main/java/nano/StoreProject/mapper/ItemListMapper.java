@@ -20,4 +20,6 @@ public interface ItemListMapper {
 
     // 상품 총 개수
     int itemsGetTotal();
+
+    void deleteItem(int itemId);
 }

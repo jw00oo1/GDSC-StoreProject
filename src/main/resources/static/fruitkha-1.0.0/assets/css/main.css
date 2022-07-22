@@ -548,6 +548,7 @@ a.navbar-brand img {
 nav.main-menu ul {
   margin: 0;
   padding: 0;
+  float: right;
   list-style: none;
 }
 
@@ -736,7 +737,7 @@ ul.navbar-nav {
   margin: 0 auto;
 }
 
-.search-area, .login-area {
+.search-area, .login-area, .signin-area{
   position: fixed;
   left: 0;
   top: 0;
@@ -755,15 +756,15 @@ span.close-btn {
   cursor: pointer;
 }
 
-.search-area, .login-area {
+.search-area, .login-area, .signin-area {
   height: 100%;
 }
 
-.search-area div, .login-area div {
+.search-area div, .login-area div, .signin-area div {
   height: 100%;
 }
 
-.search-bar, .login-bar {
+.search-bar, .login-bar, .signin-bar {
   height: 100%;
   display: table;
   width: 100%;
@@ -773,7 +774,7 @@ a.mobile-show {
   display: none;
 }
 
-.search-area .search-bar div.search-bar-tablecell, .login-area .login-bar div.search-bar-tablecell{
+.search-area .search-bar div.search-bar-tablecell, .login-area .login-bar div.search-bar-tablecell, .signin-area .signin-bar div.search-bar-tablecell {
   display: table-cell;
   vertical-align: middle;
   height: auto;
@@ -824,7 +825,7 @@ a.mobile-show {
   margin-left: 5px;
 }
 
-.search-area, .login-area {
+.search-area, .login-area, .signin-area {
   visibility: hidden;
   opacity: 0;
   -webkit-transition: 0.3s;
@@ -832,7 +833,7 @@ a.mobile-show {
   transition: 0.3s;
 }
 
-.search-area.search-active, .login-area.login-active{
+.search-area.search-active, .login-area.login-active, .signin-area.signin-active{
   visibility: visible;
   opacity: 1;
   z-index: 999;
@@ -1361,7 +1362,7 @@ a.mobile-show.search-bar-icon:hover {
 
 ----------------------------------------------------------------------------- */
 .hero-bg {
-  background-image: url(../img/hero-bg.jpg);
+  background-image: url(/img/used-transaction.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

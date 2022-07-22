@@ -21,5 +21,9 @@ public class ItemService {
 
     public List<ItemVo> getItems() {return itemListMapper.itemsGetList();}
 
-    public ItemVo getItemInfo(int itemId) {return itemListMapper.getItemInfo(itemId);}
+    public ItemVo getItemInfo(int itemNo) {return itemListMapper.getItemInfo(itemNo);}
+
+    public void deleteItem(int itemNo) {
+        itemListMapper.deleteItem(itemNo);
+    }
 }

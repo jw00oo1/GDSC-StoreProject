@@ -6,8 +6,8 @@ import java.sql.Timestamp;
 
 @Data
 public class ChatMessage {
-    private String roomNo;
-    private String messageNo;
+    private Integer roomNo;
+    private Integer messageNo;
     private String message;
     private String senderId;
     private Timestamp createDate;

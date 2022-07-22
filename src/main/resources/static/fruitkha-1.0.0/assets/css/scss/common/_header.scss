@@ -42,6 +42,7 @@ nav.main-menu {
 
     li {
       display: inline-block;
+      float: right;
 
       a {
         color: $white-color;
@@ -231,7 +232,7 @@ ul.navbar-nav {
 }
 
 //Searchbar
-.search-area, .login-area{
+.search-area, .login-area, .signin-area{
   position: fixed;
   left: 0;
   top: 0;
@@ -250,7 +251,7 @@ span.close-btn {
   cursor: pointer;
 }
 
-.search-area, .login-area{
+.search-area, .login-area, .signin-area{
   height: 100%;
 
   div {
@@ -258,7 +259,7 @@ span.close-btn {
   }
 }
 
-.search-bar, .login-bar{
+.search-bar, .login-bar, .signin-bar{
   height: 100%;
   display: table;
   width: 100%;
@@ -268,7 +269,7 @@ a.mobile-show {
   display: none;
 }
 
-.search-area .search-bar div.search-bar-tablecell, .login-area .login-bar div.search-bar-tablecell{
+.search-area .search-bar div.search-bar-tablecell, .login-area .login-bar div.search-bar-tablecell, .signin-area .signin-bar div.signin-bar-tablecell{
   display: table-cell;
   vertical-align: middle;
   height: auto;
@@ -309,7 +310,7 @@ a.mobile-show {
   }
 }
 
-.search-area, .login-area {
+.search-area {
   visibility: hidden;
   opacity: 0;
   transition: 0.3s;
@@ -327,6 +328,18 @@ a.mobile-show {
   transition: 0.3s;
 
   &.login-active {
+    visibility: visible;
+    opacity: 1;
+    z-index: 999;
+  }
+}
+
+.signin-area {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+
+  &.signin-active {
     visibility: visible;
     opacity: 1;
     z-index: 999;

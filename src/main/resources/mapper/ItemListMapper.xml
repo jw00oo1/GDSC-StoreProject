@@ -20,7 +20,7 @@
     <select id="getItemInfo" resultMap="itemResult">
         SELECT *
         FROM ITEMS
-        WHERE ITEM_NO=#{itemId}
+        WHERE ITEM_NO=#{itemNo}
     </select>
 
     <select id="itemsGetList" resultType="nano.StoreProject.vo.ItemVo">
@@ -32,5 +32,9 @@
     <select id="itemsGetTotal" resultType="int">
         SELECT COUNT(*) FROM ITEMS
     </select>
+
+    <delete id="deleteItem" parameterType="int">
+        DELETE FROM ITEMS WHERE ITEM_NO=#{itemNo}
+    </delete>
 
 </mapper>

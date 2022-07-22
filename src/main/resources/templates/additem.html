@@ -9,7 +9,7 @@
     <title>nano's Store Platform</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="/fruitkha-1.0.0/assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -41,11 +41,11 @@
 <body>
 
     <!--PreLoader-->
-<!--    <div class="loader">-->
-<!--        <div class="loader-inner">-->
-<!--            <div class="circle"></div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
     <!--PreLoader Ends-->
 
     <!-- header -->
@@ -57,7 +57,7 @@
                         <!-- logo -->
                         <div class="site-logo">
                             <a href="/">
-                                <img src="fruitkha-1.0.0/assets/img/logo.png" alt="">
+                                <img src="/img/logo.png" alt="">
                             </a>
                         </div>
                         <!-- logo -->
@@ -65,26 +65,24 @@
                         <!-- menu start -->
                         <nav class="main-menu">
                             <ul>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="mobile-hide search-bar-icon" href="/register-item"><i class="fas fa-plus-square"></i></a>
+                                    </div>
+                                </li>
                                 <th:block th:if="${session.userName} == null">
-                                    <li><a class="mobile-hide login-form" href="/">LogIn</a></li>
-                                    <li><a href="signup">SignIn</a></li>
+                                    <li><a class="mobile-hide login-form" href="#">LogIn</a></li>
+                                    <li><a class="mobile-hide signin-form" href="#">SignIn</a></li>
                                 </th:block>
                                 <th:block th:unless="${session.userName} == null">
                                     <li><a th:text="${session.userName}" href=""></a></li>
-                                    <li><a href="/logout">LogOut</a></li>
+                                    <li><a class="mobile-hide" href="/logout">LogOut</a></li>
                                 </th:block>
 
-                                <div class="header-icons">
-                                    <li>
-                                        <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                                        <a class="mobile-hide search-bar-icon" href="register-item"><i class="fas fa-plus-square"></i></a>
-                                    </li>
-                                </div>
                             </ul>
                         </nav>
-                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <a class="mobile-show search-bar-icon" href="/register-item"><i class="fas fa-plus-square"></i></a>
                         <div class="mobile-menu"></div>
-                        <!--                    <div class="mobile-menu"></div>-->
                         <!-- menu end -->
                     </div>
                 </div>
@@ -93,43 +91,46 @@
     </div>
     <!-- end header -->
 
-    <!-- search area -->
-    <div class="search-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
-                    <div class="search-bar">
-                        <div class="search-bar-tablecell">
-                            <h3>Search For:</h3>
-                            <input type="text" placeholder="Keywords">
-                            <!--                        <button type="submit">Search <i class="fas fa-search"></i></button>-->
+    <form method="post" action="login">
+        <div class="login-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                        <div class="login-bar">
+                            <div class="search-bar-tablecell">
+                                <h3>Login</h3>
+                                <input type="text" name="userId" placeholder="Your ID">
+                                <input type="password" name="userPw" placeholder="Your Pw">
+                                <button type="submit">LogIn</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end search area -->
-    <!--<form method="post" action="/">-->
-    <!--    <div class="login-area">-->
-    <!--        <div class="container">-->
-    <!--            <div class="row">-->
-    <!--                <div class="col-lg-12">-->
-    <!--                    <span class="close-btn"><i class="fas fa-window-close"></i></span>-->
-    <!--                    <div class="login-bar">-->
-    <!--                        <div class="search-bar-tablecell">-->
-    <!--                            <h3>Login</h3>-->
-    <!--                            <input type="text" name="userId" placeholder="Your ID">-->
-    <!--                            <input type="password" name="userPw" placeholder="Your Pw">-->
-    <!--                            <button type="submit">LogIn</button>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</form>-->
+    </form>
+
+    <form method="post" action="signin">
+        <div class="signin-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                        <div class="signin-bar">
+                            <div class="search-bar-tablecell">
+                                <h3>Sign in</h3>
+                                <input type="text" name="userId" placeholder="Your ID">
+                                <input type="text" name="userName" placeholder="Your Name">
+                                <input type="password" name="userPw" placeholder="Your Pw">
+                                <button type="submit">Sign In</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <!-- breadcrumb-section -->
     <div class="breadcrumb-section breadcrumb-bg">

@@ -130,6 +130,7 @@
 
                                 $img = $("<img class='profile_img'>").attr("src", "img/simple-person.png");
                                 $divs = $("<div class='userNameId'>").text(data[i].sellerId);
+                                $divi = $("<div class='itemNo'>").text(data[i].itemNo);
                             }
                             // 자신이 판매자 입장일 때
                             else{
@@ -137,10 +138,12 @@
 
                                 $img = $("<img class='profile_img'>").attr("src", "img/opposite.png");
                                 $divs = $("<div class='userNameId'>").text(data[i].buyerId);
+                                $divi = $("<div class='itemNo'>").text(data[i].itemNo);
                             }
 
                             $div.append($img);
                             $div.append($divs);
+                            $div.append($divi);
                             $div.append($span);
 
                             $chatWrap.append($div);

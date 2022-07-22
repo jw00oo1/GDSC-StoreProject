@@ -2,10 +2,31 @@ function valid_chat() {
     var uid = '<%=(String)session.getAttribute("userId")%>';
 
     if (uid == "null") {
-        jQuery('#form_status').html('<span class="wrong">You need to log in!</span>');
-        notice( f.chatButton );
+        var url = "/";
+        alert("로그인이 필요한 작업입니다 :(");
+        window.location.replace(url);
+//        jQuery('#form_status').html('<span class="wrong">로그인이 필요한 작업입니다 :(</span>');
+//        notice( f.chatButton );
         return false;
     }
+
+    return true;
+}
+
+function getToPost(id) {
+    console.log(id);
+    let f = document.createElement('form');
+    let obj;
+    obj = document.createElement('input');
+    obj.setAttribute('type', 'hidden');
+    obj.setAttribute('name', 'itemNo');
+    obj.setAttribute('value', id);
+
+    f.appendChild(obj);
+    f.setAttribute('method', 'post');
+    f.setAttribute('action', 'deleteitem');
+    document.body.appendChild(f);
+    f.submit();
 
     return true;
 }

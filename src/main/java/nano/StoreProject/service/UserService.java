@@ -34,10 +34,10 @@ public class UserService {
         if (findUser != null) {
             return false;
         }
-        findUser = userMapper.selectUserByName(userVo.getUserName());
-        if (findUser != null) {
-            return false;
-        }
+//        findUser = userMapper.selectUserByName(userVo.getUserName());
+//        if (findUser != null) {
+//            return false;
+//        }
 
         userVo.setUserPw(passwordEncoder.encode(userVo.getUserPw()));
         userVo.setUserAuth("USER");
@@ -50,13 +50,18 @@ public class UserService {
 
     public String loginUser(UserVo userVo, HttpSession session) {
         UserVo findUser = userMapper.selectUserById(userVo.getUserId());
-        String findUserPw = findUser.getUserPw();
-        if (passwordEncoder.matches(userVo.getUserPw(), findUserPw)){
-            session.setAttribute("userId", userVo.getUserId());
-            session.setAttribute("userName", findUser.getUserName());
+        if (findUser != null) {
+            String findUserPw = findUser.getUserPw();
+            if (passwordEncoder.matches(userVo.getUserPw(), findUserPw)){
+                session.setAttribute("userId", userVo.getUserId());
+                session.setAttribute("userName", findUser.getUserName());
 
-            return findUser.getUserName();
+                return findUser.getUserName();
+            }
         }
+
+        session.setAttribute("userId", null);
+        session.setAttribute("userName", null);
 
         return null;
     }

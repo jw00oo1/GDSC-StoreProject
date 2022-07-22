@@ -26,18 +26,30 @@ public class ChatService {
                 .filter(room -> room.getItemNo().equals(Integer.toString(itemId))).findAny();
     }
 
-    public ChatRoom getChatRoom_pk(String roomNo) { return chatMapper.getChatRoom(roomNo); }
+    public ChatRoom getChatRoom_pk(int roomNo) { return chatMapper.getChatRoom(roomNo); }
 
     // one's own chatroom list
     public List<ChatRoom> getChatRoomList(String userId) {
         return chatMapper.chatRoomList(userId);
     }
 
-    public List<ChatMessage> getChatMessage(String roomNo) {
+    public List<ChatMessage> getChatMessage(int roomNo) {
         return chatMapper.messageList(roomNo);
     }
 
     public void createChatMessage(ChatMessage chatMessage) {
         chatMapper.createChatMessage(chatMessage);
+    }
+
+    public boolean removeItemAllChat(int itemNo) {
+        List<ChatRoom> chatRoomList = chatMapper.itemChatRoomList(itemNo);
+        if (chatRoomList.isEmpty()) {
+            return false;
+        }
+        chatRoomList.stream().forEach(chatRoom -> {
+            chatMapper.deleteChatMessage(chatRoom.getRoomNo());
+            chatMapper.deleteChatRoom(chatRoom.getRoomNo());
+        });
+        return true;
     }
 }

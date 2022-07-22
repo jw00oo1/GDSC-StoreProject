@@ -27,13 +27,19 @@
         where SELLER_ID=#{userId} or BUYER_ID=#{userId}
     </select>
 
-    <select id="getChatRoom" parameterType="string" resultMap="chatRoomResult">
+    <select id="itemChatRoomList" parameterType="int" resultMap="chatRoomResult">
+        select *
+        from CHATROOM
+        where ITEM_NO=#{itemNo}
+    </select>
+
+    <select id="getChatRoom" parameterType="int" resultMap="chatRoomResult">
         select *
         from CHATROOM
         where ROOM_NO=#{roomNo}
     </select>
 
-    <select id="messageList" parameterType="string" resultMap="chatMessageResult">
+    <select id="messageList" parameterType="int" resultMap="chatMessageResult">
         select *
         from CHATMESSAGE
         where ROOM_NO=#{roomNo}
@@ -43,4 +49,12 @@
         insert into CHATROOM (ROOM_NO, MESSAGE, SENDER_ID)
         values(#{roomNo}, #{message}, #{senderId})
     </insert>
+
+    <delete id="deleteChatRoom" parameterType="int">
+        DELETE FROM CHATROOM WHERE ROOM_NO=#{roomNo}
+    </delete>
+
+    <delete id="deleteChatMessage" parameterType="int">
+        DELETE FROM CHATMESSAGE WHERE ROOM_NO=#{roomNo}
+    </delete>
 </mapper>

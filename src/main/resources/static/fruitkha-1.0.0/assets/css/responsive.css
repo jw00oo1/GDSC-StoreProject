@@ -185,14 +185,14 @@
 	.single-product-content {
 	    margin-left: 15px;
 	}
-	a.mobile-hide.search-bar-icon, a.mobile-hide.login-form{
+	a.mobile-hide.search-bar-icon, a.mobile-hide.login-form, a.mobile-hide.signin-form {
 	    display: none!important;
 	}
 
 	.mobile-show {
 		display: block!important;
 	}
-	a.mobile-show.search-bar-icon, a.mobile-show.login-form{
+	a.mobile-show.search-bar-icon, a.mobile-show.login-form, a.mobile-show.signin-form{
 	    position: absolute;
 	    right: 60px;
 	    top: 22px;
